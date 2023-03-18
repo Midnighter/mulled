@@ -33,12 +33,14 @@
                 <input placeholder="Optional" bind:value={pkg.build} />
             </label>
             {#if idx > 0}
-                <button on:click={() => removePackage(idx)}>Remove</button>
+                <button on:click|preventDefault={() => removePackage(idx)}
+                    >Remove</button
+                >
             {/if}
             {#if idx == packages.length - 1}
-                <button on:click={addPackage}>Add</button>
+                <button on:click|preventDefault={() => addPackage()}>Add</button>
             {/if}
         </div>
     {/each}
-    <button on:click={submit}>Submit</button>
+    <button on:click|preventDefault={() => submit()}>Submit</button>
 </div>

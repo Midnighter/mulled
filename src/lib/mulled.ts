@@ -30,7 +30,12 @@ export class MultiPackageV2ImageService {
         const [packages, baseImage, imageBuild] = line.split('\t');
         const targets = packages
             .split(',')
-            .map((token) => new TargetPackage(...token.split('=')));
+            .map(
+                (token) =>
+                    new TargetPackage(
+                        ...(token.split('=') as [string, string?, string?])
+                    )
+            );
         return this.generateName(targets, imageBuild);
     }
 

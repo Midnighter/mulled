@@ -8,5 +8,5 @@
         Paste Line
         <input bind:value={hashLine} />
     </label>
-    <button on:click={submit}>Submit</button>
+    <button on:click|preventDefault={() => submit()}>Submit</button>
 </div>

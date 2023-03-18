@@ -4,4 +4,4 @@
 </script>
 
 <pre><code>{name}</code></pre>
-<button on:click={reset}>Reset</button>
+<button on:click|preventDefault={() => reset()}>Reset</button>

@@ -4,7 +4,7 @@
 
 <div class="error">
     <p>Missing information for generating an image name!</p>
-    <button on:click={closeError}>X</button>
+    <button on:click|preventDefault={() => closeError()}>X</button>
 </div>
 
 <style>
