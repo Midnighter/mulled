@@ -17,12 +17,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: ["ubuntu-latest"]
-        node-version: ["lts/hydrogen"]
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -32,7 +27,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: lts/hydrogen
           cache: npm
       - name: Install dependencies
         run: npm ci
