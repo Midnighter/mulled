@@ -15,7 +15,7 @@
     let imageBuild = '0';
     let packages: IPackage[] = [{ name: '', version: '', build: '' } as IPackage];
     let name = '';
-    let hasError = false;
+    let exists = false;
 
     function addPackage() {
         packages = [...packages, { name: '', version: '', build: '' } as IPackage];
@@ -26,44 +26,24 @@
         packages = packages;
     }
 
-    function submit() {
-        if (hashLine) {
-            name = MultiPackageV2ImageService.parseLine(hashLine);
-        } else {
-            name = MultiPackageV2ImageService.fromPackages(packages, imageBuild);
-        }
-        if (!name) {
-            hasError = true;
-        }
-    }
-
     function reset() {
         name = '';
         hashLine = '';
         packages = [{ name: '', version: '', build: '' } as IPackage];
-        hasError = false;
     }
 
-    function closeError() {
-        hasError = false;
+    $: if (hashLine) {
+        name = MultiPackageV2ImageService.parseLine(hashLine);
+    } else {
+        name = MultiPackageV2ImageService.fromPackages(packages, imageBuild);
     }
 </script>
 
 <Header />
 
-{#if name}
-    <ResultName {name} {reset} />
-{:else}
-    {#if hasError}
-        <ErrorMessage {closeError} />
-    {/if}
-    <Description />
-    <HashLineInput bind:hashLine {submit} />
-    <AssembleImage
-        bind:packages
-        bind:imageBuild
-        {addPackage}
-        {removePackage}
-        {submit}
-    />
-{/if}
+<ResultName {name} {exists} />
+
+<Description />
+<HashLineInput bind:hashLine />
+<AssembleImage bind:packages bind:imageBuild {addPackage} {removePackage} />
+<button on:click|preventDefault={() => reset()}>Reset</button>

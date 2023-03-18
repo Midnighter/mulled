@@ -1,7 +1,18 @@
 <script lang="ts">
     export let name: string;
-    export let reset: CallableFunction;
+    export let exists: boolean;
 </script>
 
-<pre><code>{name}</code></pre>
-<button on:click|preventDefault={() => reset()}>Reset</button>
+<div>
+    {#if name}
+        <label>
+            Image:
+            <pre><code>{name}</code></pre>
+        </label>
+        {#if exists}
+            <span>&#10004;</span>
+        {:else}
+            <span>&#10060;</span>
+        {/if}
+    {/if}
+</div>

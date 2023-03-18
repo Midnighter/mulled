@@ -1,6 +1,5 @@
 <script lang="ts">
     export let hashLine: string;
-    export let submit: CallableFunction;
 </script>
 
 <div>
@@ -8,5 +7,4 @@
         Paste Line
         <input bind:value={hashLine} />
     </label>
-    <button on:click|preventDefault={() => submit()}>Submit</button>
 </div>

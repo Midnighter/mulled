@@ -5,7 +5,6 @@
     export let imageBuild: string;
     export let addPackage: CallableFunction;
     export let removePackage: CallableFunction;
-    export let submit: CallableFunction;
 </script>
 
 <h2>Assemble Image Information</h2>
@@ -42,5 +41,4 @@
             {/if}
         </div>
     {/each}
-    <button on:click|preventDefault={() => submit()}>Submit</button>
 </div>
