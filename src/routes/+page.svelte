@@ -1,29 +1,69 @@
 <script lang="ts">
-    import { TargetPackage } from '$lib/mulled';
+    import {
+        MultiPackageV2ImageService,
+        TargetPackage,
+        type IPackage
+    } from '$lib/mulled';
+    import Header from '$components/Header.svelte';
+    import ResultName from '$components/ResultName.svelte';
+    import Description from '$components/Description.svelte';
+    import HashLineInput from '$components/HashLineInput.svelte';
+    import AssembleImage from '$components/AssembleImage.svelte';
+    import ErrorMessage from '$components/ErrorMessage.svelte';
 
-    let packages = [new TargetPackage()];
+    let hashLine = '';
+    let imageBuild = '0';
+    let packages: IPackage[] = [{ name: '', version: '', build: '' } as IPackage];
+    let name = '';
+    let hasError = false;
 
-    function addTarget() {
-        packages = [...packages, new TargetPackage()];
+    function addPackage() {
+        packages = [...packages, { name: '', version: '', build: '' } as IPackage];
     }
 
-    function removeTarget(index: number) {
+    function removePackage(index: number) {
         packages.splice(index, 1);
         packages = packages;
     }
+
+    function submit() {
+        if (hashLine) {
+            name = MultiPackageV2ImageService.parseLine(hashLine);
+        } else {
+            name = MultiPackageV2ImageService.fromPackages(packages, imageBuild);
+        }
+        if (!name) {
+            hasError = true;
+        }
+    }
+
+    function reset() {
+        name = '';
+        hashLine = '';
+        packages = [{ name: '', version: '', build: '' } as IPackage];
+        hasError = false;
+    }
+
+    function closeError() {
+        hasError = false;
+    }
 </script>
 
-<h1>Mulled BioContainers Name Generator</h1>
+<Header />
 
-{#each packages as pkg, idx (idx)}
-    <div>
-        <input placeholder="Name" bind:value={pkg.name} />
-        <input placeholder="Version" bind:value={pkg.version} />
-        {#if idx > 0}
-            <button on:click={() => removeTarget(idx)}>Remove</button>
-        {/if}
-        {#if idx == packages.length - 1}
-            <button on:click={addTarget}>Add</button>
-        {/if}
-    </div>
-{/each}
+{#if name}
+    <ResultName {name} {reset} />
+{:else}
+    {#if hasError}
+        <ErrorMessage {closeError} />
+    {/if}
+    <Description />
+    <HashLineInput bind:hashLine {submit} />
+    <AssembleImage
+        bind:packages
+        bind:imageBuild
+        {addPackage}
+        {removePackage}
+        {submit}
+    />
+{/if}
