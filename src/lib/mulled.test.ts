@@ -30,7 +30,7 @@ describe('MultiPackageV2ImageService', () => {
                     { name: 'samtools', version: '1.15', build: '' }
                 ],
                 '0'
-            )
+            )?.toString()
         ).toBe(
             'mulled-v2-d057255d4027721f3ab57f6a599a2ae81cb3cbe3:13051b049b6ae536d76031ba94a0b8e78e364815-0'
         );
