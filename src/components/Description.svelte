@@ -7,8 +7,8 @@
 </p>
 
 <p>
-    Once you start adding information, an image name will be generated and shown
-    above. That name will also be checked on <a href="https://quay.io">Quay.io</a> to
-    see if such an image exists in the
+    Once you start adding information, an image name will be generated and shown above.
+    That name will also be checked on <a href="https://quay.io">Quay.io</a> to see if
+    such an image exists in the
     <a href="https://quay.io/organization/biocontainers">BioContainers organization</a>.
 </p>
