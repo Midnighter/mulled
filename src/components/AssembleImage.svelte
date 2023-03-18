@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { IPackage} from '$lib/mulled';
+    import type { IPackage } from '$lib/mulled';
 
     export let packages: IPackage[];
     export let imageBuild: string;
