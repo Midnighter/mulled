@@ -6,6 +6,23 @@ export interface IPackage {
     build: string;
 }
 
+export class Package implements IPackage {
+    readonly id: number;
+    name: string;
+    version: string;
+    build: string;
+
+    private static counter = 0;
+
+    constructor(name: string, version = '', build = '') {
+        this.id = Package.counter;
+        Package.counter += 1;
+        this.name = name;
+        this.version = version;
+        this.build = build;
+    }
+}
+
 export class TargetPackage implements IPackage {
     readonly name: string;
     readonly version: string;
@@ -63,8 +80,8 @@ export class MultiPackageV2ImageService {
     ): MultiPackageV2Image | null {
         return this.generateName(
             packages
-                // Remove packages without any defined attributes.
-                .filter((pkg) => Object.values(pkg).some((val) => val !== ''))
+                // Keep only packages with a name attribute.
+                .filter((pkg) => !!pkg.name)
                 .map((pkg) => new TargetPackage(pkg.name, pkg.version, pkg.build)),
             imageBuild
         );
