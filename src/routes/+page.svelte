@@ -48,7 +48,7 @@
                     console.debug(reason);
                     exists = false;
                 });
-        }, 500);
+        }, 250);
     }
 
     function addPackage() {
