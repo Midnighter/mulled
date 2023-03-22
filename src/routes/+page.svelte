@@ -6,6 +6,7 @@
         TargetPackage,
         Package
     } from '$lib/mulled';
+    import { dark, light } from '$lib/theme';
     import { PUBLIC_QUAY_API } from '$env/static/public';
     import Card from '$components/Card.svelte';
     // Relative project imports
@@ -15,12 +16,17 @@
     import HashLineInput from './HashLineInput.svelte';
     import PackageList from './PackageList.svelte';
 
+    let isDark = true;
     let hashLine = '';
     let imageBuild = '0';
     let packages: Package[] = [new Package('')];
     let image: MultiPackageV2Image | null = null;
     let exists: boolean | null = null;
     let timer: ReturnType<typeof setTimeout>;
+
+    function toggleTheme() {
+        isDark = !isDark;
+    }
 
     function checkImageExistance() {
         exists = null;
@@ -86,18 +92,24 @@
     }
 </script>
 
-<Header />
+<Header {isDark} theme={isDark ? dark : light} {toggleTheme} />
 
 <div id="content">
-    <Card header="About">
+    <Card header="About" theme={isDark ? dark : light}>
         <Description />
     </Card>
-    <Card header="Generated Name">
-        <ResultName {image} {exists} />
+    <Card header="Generated Name" theme={isDark ? dark : light}>
+        <ResultName {image} {exists} theme={isDark ? dark : light} />
     </Card>
-    <Card header="Define Image">
-        <HashLineInput bind:hashLine />
-        <PackageList bind:packages bind:imageBuild {addPackage} {removePackage} />
+    <Card header="Define Image" theme={isDark ? dark : light}>
+        <HashLineInput bind:hashLine theme={isDark ? dark : light} />
+        <PackageList
+            bind:packages
+            bind:imageBuild
+            {addPackage}
+            {removePackage}
+            theme={isDark ? dark : light}
+        />
         <button id="reset" on:click|preventDefault={resetInfo}>Reset</button>
     </Card>
 </div>
@@ -116,22 +128,18 @@
     }
     :global(body) {
         background-color: var(--base1);
-        color: var(--base0);
         margin: 0;
     }
     :global(a) {
         color: var(--green);
     }
     :global(input) {
-        background-color: var(--base02);
-        color: var(--base0);
         border-radius: 0.25rem;
     }
     :global(::placeholder) {
         color: var(--base01);
     }
     :global(button) {
-        background-color: var(--base1);
         border-radius: 0.25rem;
     }
     #content {

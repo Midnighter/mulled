@@ -1,6 +1,7 @@
 <script lang="ts">
     // Absolute project imports
     import type { Package } from '$lib/mulled';
+    import type { ITheme } from '$lib/theme';
     // Relative project imports
     import PackageInput from './PackageInput.svelte';
 
@@ -8,6 +9,7 @@
     export let imageBuild: string;
     export let addPackage: CallableFunction;
     export let removePackage: CallableFunction;
+    export let theme: ITheme;
 </script>
 
 <h3>Package List</h3>
@@ -21,6 +23,7 @@
                 min="0"
                 placeholder="Optional"
                 bind:value={imageBuild}
+                style="background-color: {theme.backHighlight}; color: {theme.fontHighlight};"
             />
         </label>
     </div>
@@ -33,6 +36,7 @@
             canRemove={idx > 0}
             {addPackage}
             {removePackage}
+            {theme}
         />
     {/each}
 </div>

@@ -1,7 +1,9 @@
 <script lang="ts">
     // Absolute project imports
+    import type { ITheme } from '$lib/theme';
     import type { MultiPackageV2Image } from '$lib/mulled';
 
+    export let theme: ITheme;
     export let image: MultiPackageV2Image | null;
     export let exists: boolean | null;
 
@@ -20,7 +22,10 @@
 </script>
 
 <div>
-    <pre> <code>{name}</code> {#if name}
+    <pre
+        style="background-color: {theme.backHighlight}; color: {theme.fontHighlight};"> <code
+            >{name}</code
+        > {#if name}
             <button
                 id="copy"
                 on:click|preventDefault={() => navigator.clipboard.writeText(name)}
@@ -36,8 +41,6 @@
         min-width: 93ch;
         min-height: 1.5rem;
         padding: 0.5rem;
-        background-color: var(--base02);
-        color: var(--base1);
         border-radius: 0.25rem;
     }
     code {
