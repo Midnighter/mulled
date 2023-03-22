@@ -60,7 +60,7 @@ export function hexDigest(message: string): string {
     return digest.toString();
 }
 
-export class MultiPackageV2ImageService {
+export class MultiPackageV2ImageBuilder {
     static parseLine(line: string): MultiPackageV2Image | null {
         const [packages, _baseImage, imageBuild] = line.split('\t');
         const targets = packages

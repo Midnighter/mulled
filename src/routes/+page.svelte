@@ -2,7 +2,7 @@
     // Absolute project imports
     import {
         MultiPackageV2Image,
-        MultiPackageV2ImageService,
+        MultiPackageV2ImageBuilder,
         TargetPackage,
         Package
     } from '$lib/mulled';
@@ -76,9 +76,9 @@
     }
 
     $: if (hashLine) {
-        image = MultiPackageV2ImageService.parseLine(hashLine.trim());
+        image = MultiPackageV2ImageBuilder.parseLine(hashLine.trim());
     } else {
-        image = MultiPackageV2ImageService.fromPackages(packages, imageBuild);
+        image = MultiPackageV2ImageBuilder.fromPackages(packages, imageBuild);
     }
 
     $: if (image) {

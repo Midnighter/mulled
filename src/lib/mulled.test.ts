@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { hexDigest, MultiPackageV2ImageService } from '$lib/mulled';
+import { hexDigest, MultiPackageV2ImageBuilder } from '$lib/mulled';
 
 describe('hexDigest', () => {
     it('hashes chromap, samtools', () => {
@@ -21,10 +21,10 @@ describe('hexDigest', () => {
     });
 });
 
-describe('MultiPackageV2ImageService', () => {
+describe('MultiPackageV2ImageBuilder', () => {
     it('generates a correct hash', () => {
         expect(
-            MultiPackageV2ImageService.fromPackages(
+            MultiPackageV2ImageBuilder.fromPackages(
                 [
                     { name: 'samclip', version: '0.4.0', build: '' },
                     { name: 'samtools', version: '1.15', build: '' }
