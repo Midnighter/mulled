@@ -74,7 +74,7 @@ export class MultiPackageV2ImageBuilder {
             )
             // Keep only packages with a name attribute.
             .filter((pkg) => !!pkg.name);
-        return this.generateName(targets, imageBuild);
+        return this.generateName(targets, imageBuild ? imageBuild : '0');
     }
 
     static fromPackages(
@@ -86,13 +86,13 @@ export class MultiPackageV2ImageBuilder {
                 // Keep only packages with a name attribute.
                 .filter((pkg) => !!pkg.name)
                 .map((pkg) => new TargetPackage(pkg.name, pkg.version, pkg.build)),
-            imageBuild
+            imageBuild ? imageBuild : '0'
         );
     }
 
     private static generateName(
         targets: TargetPackage[],
-        imageBuild = ''
+        imageBuild: string
     ): MultiPackageV2Image | null {
         if (targets.length === 0) return null; // bail
         if (targets.length === 1) {
