@@ -7,6 +7,7 @@
         Package
     } from '$lib/mulled';
     import { PUBLIC_QUAY_API } from '$env/static/public';
+    import Card from '$components/Card.svelte';
     // Relative project imports
     import Header from './Header.svelte';
     import ResultName from './ResultName.svelte';
@@ -85,14 +86,20 @@
     }
 </script>
 
-<div>
-    <Header />
-    <Description />
-    <ResultName {image} {exists} />
-    <h2>Define Dependencies</h2>
-    <HashLineInput bind:hashLine />
-    <PackageList bind:packages bind:imageBuild {addPackage} {removePackage} />
-    <button on:click|preventDefault={() => reset()}>Reset</button>
+<Header />
+
+<div id="content">
+    <Card header="About">
+        <Description />
+    </Card>
+    <Card header="Generated Name">
+        <ResultName {image} {exists} />
+    </Card>
+    <Card header="Define Image">
+        <HashLineInput bind:hashLine />
+        <PackageList bind:packages bind:imageBuild {addPackage} {removePackage} />
+        <button id="reset" on:click|preventDefault={() => reset()}>Reset</button>
+    </Card>
 </div>
 
 <style>
@@ -108,8 +115,9 @@
         --green: rgb(133, 153, 0);
     }
     :global(body) {
-        background-color: var(--base03);
+        background-color: var(--base1);
         color: var(--base0);
+        margin: 0;
     }
     :global(a) {
         color: var(--green);
@@ -117,8 +125,20 @@
     :global(input) {
         background-color: var(--base02);
         color: var(--base0);
+        border-radius: 0.25rem;
     }
     :global(::placeholder) {
         color: var(--base01);
+    }
+    #content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #reset {
+        margin-top: 1.5rem;
+        background-color: var(--base1);
+        border-radius: 0.25rem;
     }
 </style>

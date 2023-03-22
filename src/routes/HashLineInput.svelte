@@ -13,3 +13,9 @@
         <input type="text" bind:value />
     </label>
 </div>
+
+<style>
+    input {
+        width: 55%;
+    }
+</style>

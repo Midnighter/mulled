@@ -20,7 +20,6 @@
 </script>
 
 <div>
-    <h2>Generated Name:</h2>
     <pre><code>{name}</code></pre>
     <span>{@html symbol}</span>
 </div>
@@ -33,5 +32,6 @@
         padding: 1em;
         background-color: var(--base02);
         color: var(--base1);
+        border-radius: 0.25rem;
     }
 </style>

@@ -32,18 +32,27 @@
 
 <div>
     <label>
-        Name
+        Name:
         <input type="text" bind:value={name} />
     </label>
     <label>
-        Version
+        Version:
         <input type="text" placeholder="Optional" bind:value={version} />
     </label>
     <label>
-        Build
+        Build:
         <input type="text" placeholder="Optional" bind:value={build} />
     </label>
     {#if canRemove}
         <button on:click|preventDefault={() => removePackage(index)}>Remove</button>
     {/if}
 </div>
+
+<style>
+    div > :global(label) {
+        margin-left: 0.5rem;
+    }
+    div > :first-child {
+        margin-left: 0;
+    }
+</style>

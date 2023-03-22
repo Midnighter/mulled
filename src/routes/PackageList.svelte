@@ -12,14 +12,19 @@
 
 <h3>Package List</h3>
 
-<div>
-    <label>
-        Image Build Number
-        <input type="number" min="0" placeholder="Optional" bind:value={imageBuild} />
-    </label>
-</div>
+<div class="list-wrapper">
+    <div>
+        <label>
+            Image Build Number:
+            <input
+                type="number"
+                min="0"
+                placeholder="Optional"
+                bind:value={imageBuild}
+            />
+        </label>
+    </div>
 
-<div>
     {#each packages as pkg, idx (pkg.id)}
         <PackageInput
             bind:pkg
@@ -31,3 +36,14 @@
         />
     {/each}
 </div>
+
+<style>
+    .list-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .list-wrapper > :global(*) {
+        margin-top: 0.5rem;
+        flex: 0 1 auto;
+    }
+</style>
