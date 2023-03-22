@@ -18,7 +18,7 @@
     <h1>Multi-Package BioContainers Image Name Generator</h1>
     <button
         id="themeToggle"
-        on:click|preventDefault={toggleTheme}
+        on:click|preventDefault={() => toggleTheme()}
         style="color: {theme.fontColor};">{@html symbol}</button
     >
 </div>
