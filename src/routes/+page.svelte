@@ -67,7 +67,7 @@
         packages = packages;
     }
 
-    function reset() {
+    function resetInfo() {
         hashLine = '';
         image = null;
         exists = null;
@@ -76,7 +76,7 @@
     }
 
     $: if (hashLine) {
-        image = MultiPackageV2ImageService.parseLine(hashLine);
+        image = MultiPackageV2ImageService.parseLine(hashLine.trim());
     } else {
         image = MultiPackageV2ImageService.fromPackages(packages, imageBuild);
     }
@@ -98,7 +98,7 @@
     <Card header="Define Image">
         <HashLineInput bind:hashLine />
         <PackageList bind:packages bind:imageBuild {addPackage} {removePackage} />
-        <button id="reset" on:click|preventDefault={() => reset()}>Reset</button>
+        <button id="reset" on:click|preventDefault={resetInfo}>Reset</button>
     </Card>
 </div>
 
@@ -130,6 +130,10 @@
     :global(::placeholder) {
         color: var(--base01);
     }
+    :global(button) {
+        background-color: var(--base1);
+        border-radius: 0.25rem;
+    }
     #content {
         display: flex;
         flex-direction: column;
@@ -138,7 +142,5 @@
 
     #reset {
         margin-top: 1.5rem;
-        background-color: var(--base1);
-        border-radius: 0.25rem;
     }
 </style>

@@ -20,7 +20,13 @@
 </script>
 
 <div>
-    <pre><code>{name}</code></pre>
+    <pre> <code>{name}</code> {#if name}
+            <button
+                id="copy"
+                on:click|preventDefault={() => navigator.clipboard.writeText(name)}
+                >&#128203;</button
+            >
+        {/if} </pre>
     <span>{@html symbol}</span>
 </div>
 
@@ -28,10 +34,28 @@
     pre {
         display: inline-block;
         min-width: 93ch;
-        min-height: 1em;
-        padding: 1em;
+        min-height: 1.5rem;
+        padding: 0.5rem;
         background-color: var(--base02);
         color: var(--base1);
         border-radius: 0.25rem;
+    }
+    code {
+        -webkit-touch-callout: all;
+        -webkit-user-select: all;
+        -khtml-user-select: all;
+        -moz-user-select: all;
+        -ms-user-select: all;
+        user-select: all;
+    }
+    #copy {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    span {
+        height: 1rem;
+        min-width: 4rem;
+        display: inline-block;
     }
 </style>
