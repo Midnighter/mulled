@@ -62,7 +62,7 @@ export function hexDigest(message: string): string {
 
 export class MultiPackageV2ImageService {
     static parseLine(line: string): MultiPackageV2Image | null {
-        const [packages, baseImage, imageBuild] = line.split('\t');
+        const [packages, _baseImage, imageBuild] = line.split('\t');
         const targets = packages
             .split(',')
             .filter((token) => !!token)
