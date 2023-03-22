@@ -65,12 +65,15 @@ export class MultiPackageV2ImageService {
         const [packages, baseImage, imageBuild] = line.split('\t');
         const targets = packages
             .split(',')
+            .filter((token) => !!token)
             .map(
                 (token) =>
                     new TargetPackage(
                         ...(token.split('=') as [string, string?, string?])
                     )
-            );
+            )
+            // Keep only packages with a name attribute.
+            .filter((pkg) => !!pkg.name);
         return this.generateName(targets, imageBuild);
     }
 
